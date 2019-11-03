@@ -1,0 +1,25 @@
+<div>
+  <router-outlet name="navmenu"></router-outlet>
+  <div class="p-xl-5 d-inline-block">
+    <div *ngIf="cancelDone && cancelSuccess" class="alert alert-success">
+      You successfully cancelled your purchase.
+    </div>
+    <div *ngIf="cancelDone && !cancelSuccess" class="alert alert-danger">
+      {{ this.errorMessage }}
+    </div>
+    <h1>Purchases</h1>
+    <h3 style="padding-bottom: 10px;">To cancel a purchase, click the button beside the purchase you want to cancel:</h3>
+    <table style="width: 80%;">
+      <tr>
+        <th>ID</th>
+        <th>Product Name</th>
+        <th>Action</th>
+      </tr>
+      <tr *ngFor="let purchase of purchases">
+        <td>{{ purchase.id }}</td>
+        <td>{{ purchase.productName }}</td>
+        <td><button id="canccel" class="btn btn-danger" (click)="doCancel(purchase.id)">Cancel Purchase</button></td>
+      </tr>
+    </table>
+  </div>
+</div>

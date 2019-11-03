@@ -1,0 +1,27 @@
+<div>
+  <router-outlet name="navmenu"></router-outlet>
+  <div class="p-xl-5 d-inline-block">
+    <div *ngIf="purchaseDone && purchaseSuccess" class="alert alert-success alert-link">
+      Your purchase was successful! Click <a href="#" routerLink="/purchases">here</a> to view your purchase history.
+    </div>
+    <div *ngIf="purchaseDone && !purchaseSuccess" class="alert alert-danger">
+      {{ this.errorMessage }}
+    </div>
+    <h1>Products</h1>
+    <h3 style="padding-bottom: 10px;">Select a product you'd like to purchase from the list below:</h3>
+    <table matSort (matSortChange)="sortData($event)" style="width: 80%;">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th mat-sort-header="price">Price</th>
+        <th>Action</th>
+      </tr>
+      <tr *ngFor="let product of products">
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | number:'1.2-2' }}</td>
+        <td><button id="purchase" class="btn btn-success" (click)="doPurchase(product.id, getUser())">Purchase</button></td>
+      </tr>
+    </table>
+  </div>
+</div>
